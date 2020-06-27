@@ -20,3 +20,4 @@ Route::get('/', function () {
 /*Auth::routes();*/
 
 Route::get('MyWorks', 'MyworkController@index')->name('MyWork.index');
+Route::get('create', 'MyworkController@create')->name('create.MyWork');

@@ -18,4 +18,12 @@ class MyworkController extends Controller
 
 
     }
+    
+public function create(){
+
+
+return view ('MyWork.create');    
+}
+
+
 }

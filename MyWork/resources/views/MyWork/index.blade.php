@@ -6,7 +6,7 @@
 <h2> My personal projects list: </h2>
 </div>
 <div class="pull-right">
-<button class="btn" href="">Add a new project </button>
+<button class="btn" href="{{route('create.MyWork')}}">Add a new project </button>
 
 </div>
 <table class="table table-bordered">
