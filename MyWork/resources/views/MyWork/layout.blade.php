@@ -13,7 +13,7 @@
 <title>All project personal Bran David-Ionel  </title>
 </head>
 <body>
-<h1>Home page  <h1>
+<h1 style="color:green">Bran David Ionel projects <h1>
 <div class="container">
 @yield('content')
 
