@@ -5,7 +5,7 @@
 <h2> Add new project </h2>
   </div> 
 <div class="pull-right">
-<a class="btn" href="{{route('MyWork.index')}}">Back </a>
+<a class="btn btn-success" href="{{route('MyWork.index')}}" >  Back  </a>
 
   </div>  
   </div>
@@ -26,7 +26,7 @@
     <input type="file" name="images" class="form-control"> 
     
     <strong>Source code link </strong>
-    <input type="text" name="source_code_link" class="form-control"> 
+    <input type="text" name="source_code_link" class="form-control" >  
     <button type="submit" class="btn btn-primary">Submit </button>
     </div>
 </div>
