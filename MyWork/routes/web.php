@@ -23,6 +23,7 @@ Route::get('/', 'MyworkController@index')->name('MyWork.index');
 Route::get('MyWorks', 'MyworkController@index')->name('MyWork.index');
 Route::get('create', 'MyworkController@create')->name('create.MyWork');
 Route::post('store', 'MyworkController@Store')->name('MyWork.store');
+Route::get('show/project/{id}', 'MyworkController@Show');
 Route::get('edit/project/{id}', 'MyworkController@Edit');
 Route::post('update/project/{id}', 'MyworkController@Update');
 Route::get('delete/project/{id}', 'MyworkController@Delete');

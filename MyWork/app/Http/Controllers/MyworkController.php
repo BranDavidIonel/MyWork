@@ -100,4 +100,12 @@ return redirect()->route('MyWork.index')
 ->with('success','Project delete successfully!');
 } 
 
+public function Show($id){
+
+$data=DB::table('myprojects')->where('id',$id)->first();
+return view('MyWork.show',compact('data'));
+
+
+}
+
 }

@@ -38,7 +38,7 @@
 <td><img src="{{URL::to($line->images)}}" height="450px" width="400px"> </td>
 <td><a href="{{ $line->source_code_link }}" > Push </a></td>
 <td>
- <a class ="btn btn-info" href>Show</a>
+ <a class ="btn btn-info" href="{{URL:: to('show/project/'.$line->id)}}">Show</a>
  <a class ="btn btn-primary" href="{{URL:: to('edit/project/'.$line->id)}}">Edit </a>
  <a class ="btn btn-danger" href="{{URL::to('delete/project/'.$line->id)}}" 
  onclick="return confirm ('Are you sure?')">Delete </a>
