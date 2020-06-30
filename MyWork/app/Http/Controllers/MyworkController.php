@@ -10,8 +10,10 @@ use DB;
 class MyworkController extends Controller
 {
     public function index(){
-        $get_mywork=DB::table('myprojects')->get();
-
+        // get all
+        //$get_mywork=DB::table('myprojects')->get();
+       //get for pagination
+        $get_mywork=DB::table('myprojects')->latest()->paginate(2);
 
         return view('MyWork.index',compact('get_mywork')); 
 
