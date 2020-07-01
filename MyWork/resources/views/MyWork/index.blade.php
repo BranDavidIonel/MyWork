@@ -33,7 +33,7 @@
 @foreach($get_mywork as $line)
 <tr>
 <td>{{ $line->name }}</td>
-<td>{{ $line->description }}</td>
+<td>{{ str_limit($line->description,$limit=70) }}</td>
 <td><a href="{{ $line->launch_link }}"> Push </a></td>
 <td><img src="{{URL::to($line->images)}}" height="450px" width="400px"> </td>
 <td><a href="{{ $line->source_code_link }}" > Push </a></td>
