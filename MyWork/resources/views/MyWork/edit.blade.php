@@ -1,11 +1,12 @@
-@extends('MyWork.layout')
+@extends('layouts.app')
+
 @section('content')
 <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12  margin-tb">
  <div class="pull-left">
 <h2> Edit </h2>
   </div> 
 <div class="pull-right">
-<a class="btn" href="{{route('MyWork.index')}}">Back </a>
+<a class="btn  btn-primary" href="{{route('home')}}">Back </a>
 
   </div>  
   </div>

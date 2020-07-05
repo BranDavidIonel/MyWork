@@ -1,4 +1,5 @@
-@extends('MyWork.layout')
+@extends('layouts.app')
+
 @section('content')
 <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12  margin-tb">
  <div class="pull-left">

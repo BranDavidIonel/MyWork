@@ -20,7 +20,7 @@ class MyworkController extends Controller
 
 
     }
-    
+
 public function create(){
 
 
@@ -79,7 +79,7 @@ public function Update(Request $request,$id){
         $success=$image->move($upload_path,$image_full_name);
         $data['images']=$image_url;
         $project=DB::table('myprojects')->where('id',$id)->update($data);
-        return redirect()->route('MyWork.index')
+        return redirect()->route('home')
                         ->with('success','Project updated successfully!');
 
     }
@@ -98,7 +98,7 @@ if($image){
 unlink($image);
 }
 $project=DB::table('myprojects')->where('id',$id)->delete();
-return redirect()->route('MyWork.index')
+return redirect()->route('home')
 ->with('success','Project delete successfully!');
 } 
 

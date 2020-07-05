@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 /*
 Route::get('/', function () {
-    return view('MyWork.index');
+    return view('welcome');
 });
 */
 Route::get('/', 'MyworkController@index')->name('MyWork.index');
-/*Auth::routes();*/
 
+Route::get('home', 'HomeController@index')->name('home');
+Auth::routes();
 Route::get('MyWorks', 'MyworkController@index')->name('MyWork.index');
+
 Route::get('create', 'MyworkController@create')->name('create.MyWork');
 Route::post('store', 'MyworkController@Store')->name('MyWork.store');
 Route::get('show/project/{id}', 'MyworkController@Show');
