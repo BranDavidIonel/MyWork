@@ -13,11 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
+                    <div class="pull-right">
+                    <a class="btn  btn-primary" href="{{route('create.MyWork')}}">Add a new project </a>
 
+                    </div>
                   
 
                     <div class="row">
-                    <div class="col-lg-12 margin-tb">
+                    <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 margin-tb">
 
                     @if($message=Session::get('success'))
                     <div class="alert alert-success">
@@ -48,7 +52,12 @@
                     <td>{{ $line->name }}</td>
                     <td>{{ str_limit($line->description,$limit=70) }}</td>
                     <td><a href="{{ $line->launch_link }}"> Push </a></td>
-                    <td><img src="{{URL::to($line->images)}}" height="450px" width="400px"> </td>
+
+                    <td>
+                    @foreach(explode(',', $line->images) as $image)
+                    <img src="{{URL::to($image)}}" height="550px" width="480px">
+                    @endforeach
+                     </td>
                     <td><a href="{{ $line->source_code_link }}" > Push </a></td>
                     <td>
                     <a class ="btn btn-info" href="{{URL:: to('show/project/'.$line->id)}}">Show</a>

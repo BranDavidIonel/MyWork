@@ -35,7 +35,7 @@
 <td>{{ $line->name }}</td>
 <td>{{ str_limit($line->description,$limit=70) }}</td>
 <td><a href="{{ $line->launch_link }}"> Push </a></td>
-<td><img src="{{URL::to($line->images)}}" height="450px" width="400px"> </td>
+<td><img src="{{URL::to($line->images)}}" height="550px" width="480px"> </td>
 <td><a href="{{ $line->source_code_link }}" > Push </a></td>
 <td>
  <a class ="btn btn-info" href="{{URL:: to('show/project/'.$line->id)}}">Show</a>

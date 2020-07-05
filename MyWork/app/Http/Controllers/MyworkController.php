@@ -14,8 +14,13 @@ class MyworkController extends Controller
         //$get_mywork=DB::table('myprojects')->get();
        //get for pagination
         $get_mywork=DB::table('myprojects')->latest()->paginate(2);
-
-        return view('MyWork.index',compact('get_mywork')); 
+        $images_array[]=array();
+        foreach($get_mywork as $line){
+        $images["images"]=explode(',', $line->images);
+        $images_array['id']=$line->id;
+        $images_array['images']=$images["images"];
+        }
+        return view('MyWork.index',compact('get_mywork','images_array')); 
 
 
 
@@ -35,6 +40,30 @@ public function Store(Request $request){
     $data['description']=$request->description;
     $data['launch_link']=$request->launch_link;
     $data['source_code_link']=$request->source_code_link;
+    $countImages=count($request->file('images'));
+    $images_url='';
+    for($i=0;$i<$countImages;$i++){
+        $image=$request->file('images')[$i];
+        if($image){
+            $image_name=date('dmy_H_s_i');
+            $ext=strtolower($image->getClientOriginalExtension());
+            $image_full_name=$image_name.'.'.$ext;
+            $upload_path='public/media/';
+            $images_url=$images_url.$upload_path.$image_full_name.',';
+            $success=$image->move($upload_path,$image_full_name);
+            
+
+        }
+       
+    }
+    // I remove last character','  from string with multiple images separetes 
+    $images_url=mb_substr($images_url, 0, -1); 
+    $data['images']=$images_url;
+    $project=DB::table('myprojects')->insert($data);
+    return redirect()->route('MyWork.index')
+                    ->with('success','Project created successfully!');
+    /*
+    //for a single image
     $image=$request->file('images');
     if($image){
 
@@ -50,7 +79,7 @@ public function Store(Request $request){
                         ->with('success','Project created successfully!');
 
     }
-  
+  */
 
 }
 public function Edit($id){
@@ -93,9 +122,11 @@ public function Delete($id){
 //search line 
 $data=DB::table('myprojects')->where('id',$id)->first();
 //get image adress
-$image=$data->images;
+$images_split=explode(',', $data->images);
+foreach($images_split as $image){
 if($image){
 unlink($image);
+}
 }
 $project=DB::table('myprojects')->where('id',$id)->delete();
 return redirect()->route('home')

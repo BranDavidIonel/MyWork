@@ -24,7 +24,7 @@
     <input type="text" name="launch_link" class="form-control"> 
     
     <strong>Images </strong>
-    <input type="file" name="images" class="form-control"> 
+    <input type="file" name="images[]" class="form-control" multiple> 
     
     <strong>Source code link </strong>
     <input type="text" name="source_code_link" class="form-control" >  

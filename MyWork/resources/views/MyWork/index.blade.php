@@ -25,7 +25,25 @@
 <td>{{ $line->name }}</td>
 <td>{{ str_limit($line->description,$limit=70) }}</td>
 <td><a href="{{ $line->launch_link }}"> Push </a></td>
-<td><img src="{{URL::to($line->images)}}" height="450px" width="400px"> </td>
+<td>
+
+<?php
+/*
+$images_=$line->images;
+$imagesSplit=explode(',',$images_);
+foreach($imagesSplit as $image){
+    */
+?>
+@foreach(explode(',', $line->images) as $image)
+<img src="{{URL::to($image)}}" height="550px" width="480px">
+@endforeach
+<!--<img src="URL::to($image)" height="550px" width="480px">-->
+<?php
+/*
+}
+*/
+?>
+</td>
 <td><a href="{{ $line->source_code_link }}" > Push </a></td>
 <td>
  <a class ="btn btn-info" href="{{URL:: to('show/project/'.$line->id)}}">Show</a>
