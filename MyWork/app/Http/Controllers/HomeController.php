@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mywork;
+use App\Lof_info;
+use App\Helpers\UserSystemInfoHelper;
 use DB;
 class HomeController extends Controller
 {

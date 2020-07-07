@@ -25,8 +25,10 @@
     {{ $data->launch_link}}
     </div>
     <div class="form group">
-    <strong> Project  image: </strong> 
-    <img src="{{URL::to($data->images)}}" height="150px" width="150px"> 
+    <strong> Project  images: </strong>
+    @foreach(explode(',', $data->images) as $image) 
+    <img src="{{URL::to($image)}}" height="150px" width="150px">
+    @endforeach 
     </div>
     <div class="form group">    
     <strong> Project link source code: </strong>

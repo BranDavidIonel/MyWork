@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Helpers\UserSystemInfoHelper;
 //model
 use App\Mywork;
 use DB;
@@ -10,6 +11,13 @@ use DB;
 class MyworkController extends Controller
 {
     public function index(){
+        //insert log 
+        $data=array();
+        $data['ip']=UserSystemInfoHelper::get_ip();
+        $data['browser']=UserSystemInfoHelper::get_browsers();
+        $data['device']=UserSystemInfoHelper::get_device();
+        $data['os']=UserSystemInfoHelper::get_os();
+        $project=DB::table('log_info')->insert($data);
         // get all
         //$get_mywork=DB::table('myprojects')->get();
        //get for pagination
@@ -45,7 +53,7 @@ public function Store(Request $request){
     for($i=0;$i<$countImages;$i++){
         $image=$request->file('images')[$i];
         if($image){
-            $image_name=date('dmy_H_s_i');
+            $image_name=date('dmy_H_s_i').$i;
             $ext=strtolower($image->getClientOriginalExtension());
             $image_full_name=$image_name.'.'.$ext;
             $upload_path='public/media/';
