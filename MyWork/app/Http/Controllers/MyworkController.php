@@ -124,8 +124,10 @@ public function Update(Request $request,$id){
     }
     */
     //for a multiple images make update
-
-    //fist I delete old images
+    $images_url='';
+    //check if I insert new images
+    if(isset($request->file('images')[0])){
+    //first I delete old images
     $images_split=explode(',', $oldImage);
     foreach($images_split as $image){
         if($image){
@@ -134,7 +136,7 @@ public function Update(Request $request,$id){
     }
     //insert new images
     $countImages=count($request->file('images'));
-    $images_url='';
+    
     for($i=0;$i<$countImages;$i++){
         $image=$request->file('images')[$i];
         if($image){
@@ -146,11 +148,16 @@ public function Update(Request $request,$id){
             $success=$image->move($upload_path,$image_full_name);
             
 
-        }
+            }
        
 
+        }
+        $images_url=mb_substr($images_url, 0, -1); 
+    }else{
+        $images_url=$oldImage;
+
     }
-    $images_url=mb_substr($images_url, 0, -1); 
+    
     $data['images']=$images_url;
     $project=DB::table('myprojects')->where('id',$id)->update($data);
         return redirect()->route('home')
@@ -167,8 +174,8 @@ $data=DB::table('myprojects')->where('id',$id)->first();
 $images_split=explode(',', $data->images);
 foreach($images_split as $image){
 if($image){
-unlink($image);
-}
+    unlink($image);
+    }
 }
 $project=DB::table('myprojects')->where('id',$id)->delete();
 return redirect()->route('home')

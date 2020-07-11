@@ -35,7 +35,7 @@ foreach($imagesSplit as $image){
     */
 ?>
 @foreach(explode(',', $line->images) as $image)
-<img src="{{URL::to($image)}}" height="550px" width="480px">
+<img src="{{URL::to($image)}}" height="550px" width="600px">
 @endforeach
 <!--<img src="URL::to($image)" height="550px" width="480px">-->
 <?php
