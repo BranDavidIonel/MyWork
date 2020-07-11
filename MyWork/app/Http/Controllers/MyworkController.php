@@ -68,7 +68,7 @@ public function Store(Request $request){
     $images_url=mb_substr($images_url, 0, -1); 
     $data['images']=$images_url;
     $project=DB::table('myprojects')->insert($data);
-    return redirect()->route('MyWork.index')
+    return redirect()->route('home')
                     ->with('success','Project created successfully!');
     /*
     //for a single image
@@ -103,6 +103,8 @@ public function Update(Request $request,$id){
     $data['description']=$request->description;
     $data['launch_link']=$request->launch_link;
     $data['source_code_link']=$request->source_code_link;
+    //for a single image
+    /*
     $image=$request->file('images');
     if($image){
         if($oldImage){
@@ -120,7 +122,39 @@ public function Update(Request $request,$id){
                         ->with('success','Project updated successfully!');
 
     }
-    
+    */
+    //for a multiple images make update
+
+    //fist I delete old images
+    $images_split=explode(',', $oldImage);
+    foreach($images_split as $image){
+        if($image){
+        unlink($image);
+        }
+    }
+    //insert new images
+    $countImages=count($request->file('images'));
+    $images_url='';
+    for($i=0;$i<$countImages;$i++){
+        $image=$request->file('images')[$i];
+        if($image){
+            $image_name=date('dmy_H_s_i').$i;
+            $ext=strtolower($image->getClientOriginalExtension());
+            $image_full_name=$image_name.'.'.$ext;
+            $upload_path='public/media/';
+            $images_url=$images_url.$upload_path.$image_full_name.',';
+            $success=$image->move($upload_path,$image_full_name);
+            
+
+        }
+       
+
+    }
+    $images_url=mb_substr($images_url, 0, -1); 
+    $data['images']=$images_url;
+    $project=DB::table('myprojects')->where('id',$id)->update($data);
+        return redirect()->route('home')
+                        ->with('success','Project updated successfully!');
 
 
 

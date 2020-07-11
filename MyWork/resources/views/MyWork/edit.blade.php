@@ -26,11 +26,14 @@
     <input type="text" name="launch_link" class="form-control" value="{{$project->launch_link}}"> 
     
     <strong>Images </strong>
-    <input type="file" name="images" class="form-control" > 
+    <input type="file" name="images[]" class="form-control"  multiple> 
 
     <div class="col-xs-12 col-sm-12 col-md-12" >
-    <strong>Old Image </strong>  
-    <img src="{{URL::to($project->images)}}" height="150px" width="150px"> 
+    @foreach(explode(',', $project->images) as $image)
+    <strong>Old Image </strong>
+    <img src="{{URL::to($image)}}" height="550px" width="480px">
+    @endforeach
+    
     <input type="hidden" name="old_image" value="{{$project->images }}">
     <div>
 
