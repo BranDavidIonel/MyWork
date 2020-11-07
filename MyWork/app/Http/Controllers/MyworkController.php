@@ -122,6 +122,7 @@ public function Update(Request $request,$id){
                         ->with('success','Project updated successfully!');
 
     }
+    
     */
     //for a multiple images make update
     $images_url='';

@@ -1,15 +1,14 @@
 @extends('layouts.app')
-
-@section('content')
-<div class="row">
-<div class="col-xs-12 col-sm-12  col-md-12 col-lg-12  margin-tb">
-
-
-
+@section('header')
 <div class="pull-left">
 <h2><p class="text-secondary text-lg-left"> My personal projects list: </p> </h2>
 
 </div>
+@endsection
+@section('content')
+<div class="row">
+<div class="col-xs-12 col-sm-12  col-md-12 col-lg-12  margin-tb">
+
 <table class="table table-bordered">
 <tr>
 <th>Name</th>

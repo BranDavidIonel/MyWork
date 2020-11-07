@@ -55,7 +55,7 @@
 
                     <td>
                     @foreach(explode(',', $line->images) as $image)
-                    <img src="{{URL::to($image)}}" height="550px" width="480px">
+                    <img src="{{URL::to($image)}}" height="400px" width="650px">
                     @endforeach
                      </td>
                     <td><a href="{{ $line->source_code_link }}" > Push </a></td>
