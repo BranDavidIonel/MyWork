@@ -12,7 +12,7 @@
   </div>
 <form action="{{route('MyWork.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
-<div class="row">
+<div class="container row">
     <div class="col-xs-6 col-sm-6 col-md-6">
     <strong>Name </strong>
     <input type="text" name="name" class="form-control"> 
@@ -27,7 +27,15 @@
     <input type="file" name="images[]" class="form-control" multiple> 
     
     <strong>Source code link </strong>
-    <input type="text" name="source_code_link" class="form-control" >  
+    <input type="text" name="source_code_link" class="form-control" > 
+    <strong>Tags </strong>
+    <div> 
+    <select name="tags[]" multiple required>
+    	@foreach($tags as $tag)
+		<option value="{{ $tag->id}}">{{$tag->name}} </option>
+	    @endforeach
+    </select>
+    </div>
     <button type="submit" class="btn btn-primary">Submit </button>
     </div>
 </div>

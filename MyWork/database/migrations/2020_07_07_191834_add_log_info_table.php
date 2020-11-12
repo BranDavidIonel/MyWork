@@ -15,12 +15,11 @@ class AddLogInfoTable extends Migration
     {
         Schema::create('log_info', function (Blueprint $table) {
             $table->id();
-            $table->id('id');
             $table->string('ip');
             $table->string('browser');
             $table->string('device');
             $table->string('os');
-            $table->dateTime('date_time_log', 0);
+            $table->dateTime('date_time_log')->useCurrent();
             $table->timestamps();
         });
     }

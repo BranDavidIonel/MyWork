@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\UserSystemInfoHelper;
 //model
-use App\Mywork;
+use App\MyProject;
+use App\Tag;
 use DB;
 
 class MyworkController extends Controller
@@ -35,14 +36,52 @@ class MyworkController extends Controller
     }
 
 public function create(){
+    $tag=Tag::get()->all();
 
-
-return view ('MyWork.create');    
+    return view ('MyWork.create',['tags'=>$tag]);    
 }
 
 public function Store(Request $request){
+    $myprojects=new Myproject();
+    $images_url='';
+    $countImages=0;
+    $myprojects->user_id=1;
 
+    $myprojects->name=$request->name;
+    $myprojects->description=$request->description;
+    $myprojects->launch_link=$request->launch_link;
+    $myprojects->source_code_link=$request->source_code_link;
+    
+    if($request->file!=null){
+    $countImages=count($request->file('images'));
+    
+    for($i=0;$i<$countImages;$i++){
+        $image=$request->file('images')[$i];
+        if($image){
+            $image_name=date('dmy_H_s_i').$i;
+            $ext=strtolower($image->getClientOriginalExtension());
+            $image_full_name=$image_name.'.'.$ext;
+            $upload_path='public/media/';
+            $images_url=$images_url.$upload_path.$image_full_name.',';
+            $success=$image->move($upload_path,$image_full_name);
+            
 
+        }
+       
+    }
+    // I remove last character','  from string with multiple images separetes 
+    $images_url=mb_substr($images_url, 0, -1);
+    $myprojects->images=$images_url;
+    }else{
+        $myprojects->images=$images_url;
+    }
+   // dd(request('tags'));
+    //exit();
+    $myprojects->save();
+    $myprojects->tags()->attach(request('tags'));
+
+    //whitout tags to projects
+    /*
     $data=array();
     $data['name']=$request->name;
     $data['description']=$request->description;
@@ -70,6 +109,7 @@ public function Store(Request $request){
     $project=DB::table('myprojects')->insert($data);
     return redirect()->route('home')
                     ->with('success','Project created successfully!');
+    */
     /*
     //for a single image
     $image=$request->file('images');
@@ -83,11 +123,12 @@ public function Store(Request $request){
         $success=$image->move($upload_path,$image_full_name);
         $data['images']=$image_url;
         $project=DB::table('myprojects')->insert($data);
-        return redirect()->route('MyWork.index')
+       
                         ->with('success','Project created successfully!');
 
     }
   */
+  return redirect()->route('home');
 
 }
 public function Edit($id){
@@ -185,7 +226,7 @@ return redirect()->route('home')
 
 public function Show($id){
 
-$data=DB::table('myprojects')->where('id',$id)->first();
+$data=Myproject::find($id);
 return view('MyWork.show',compact('data'));
 
 

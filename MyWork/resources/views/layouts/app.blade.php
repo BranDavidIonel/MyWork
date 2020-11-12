@@ -47,7 +47,9 @@
                     
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto ">
-                        <!-- Authentication Links -->
+                        <!-- Authentication Links
+                        ---{{Request::path()==='login' }} is same with {{Request::is('login') }} 
+                         -->
                         @guest
                           
                             <li class="{{Request::path()==='login'? 'active' : '' }} nav-item ">
