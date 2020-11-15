@@ -38,7 +38,25 @@
     <div>
 
     <strong>Source code link </strong>
-    <input type="text" name="source_code_link" class="form-control" value="{{$project->source_code_link}}"> 
+    <input type="text" name="source_code_link" class="form-control" value="{{$project->source_code_link}}">
+    <div>
+    <select name="tags[]" multiple required>
+        @foreach($tags_new as $tag)
+		<option  class="list-group-item list-group-item-secondary" value="{{ $tag->id}}">{{$tag->name}} </option>
+	    @endforeach
+    </select>
+    </div>
+    <div>
+    <strong>Old tags</strong>
+    <ul class="list-group">
+	  @foreach($project->Tags as $tag)
+		<li  class="list-group-item list-group-item-success" value="{{ $tag->id}}">{{$tag->name}} </li>
+	  @endforeach
+    </ul>
+
+    @error('tags')
+        <p> {{$message}} </p>
+    @enderror 
     <button type="submit" class="btn btn-primary">Submit </button>
     </div>
 </div>

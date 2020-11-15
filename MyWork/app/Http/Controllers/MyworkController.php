@@ -132,18 +132,23 @@ public function Store(Request $request){
 
 }
 public function Edit($id){
-$project=DB::table('myprojects')->where('id',$id)->first();
-return view('MyWork.edit',compact('project'));
+//$project=DB::table('myprojects')->where('id',$id)->first();
+$project=Myproject::find($id);
+
+$tags_new=Tag::get()->all();
+return view('MyWork.edit',compact('project','tags_new'));
 
 
 }
 public function Update(Request $request,$id){
     $oldImage=$request->old_image;
     $data=array();
-    $data['name']=$request->name;
-    $data['description']=$request->description;
-    $data['launch_link']=$request->launch_link;
-    $data['source_code_link']=$request->source_code_link;
+    //$data['id']=$id;
+    $data['name']=''.$request->name;
+    $data['user_id']=''.$request->name;
+    $data['description']=''.$request->description;
+    $data['launch_link']=''.$request->launch_link;
+    $data['source_code_link']=''.$request->source_code_link;
     //for a single image
     /*
     $image=$request->file('images');
@@ -200,8 +205,14 @@ public function Update(Request $request,$id){
 
     }
     
-    $data['images']=$images_url;
-    $project=DB::table('myprojects')->where('id',$id)->update($data);
+    $data['images']=''.$images_url;
+    //$project=DB::table('myprojects')->where('id',$id)->update($data);
+     $project=Myproject::find($id);
+     $project->update($data);
+     $project->tags()->sync($request->tags);
+     
+
+
         return redirect()->route('home')
                         ->with('success','Project updated successfully!');
 
