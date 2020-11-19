@@ -16,6 +16,7 @@
                     
                     <div class="pull-right">
                     <a class="btn  btn-primary" href="{{route('create.MyWork')}}">Add a new project </a>
+                    <a class="btn  btn-primary" href="{{route('tags.all')}}">Tags </a>
 
                     </div>
                   

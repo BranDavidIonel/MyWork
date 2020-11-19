@@ -34,11 +34,37 @@ class MyworkController extends Controller
 
 
     }
-
+public function create_tag(){
+    
+    return view ('MyWork.create_tag');    
+}
 public function create(){
     $tag=Tag::get()->all();
 
     return view ('MyWork.create',['tags'=>$tag]);    
+}
+public function Store_tag(Request $request){
+    $tag=new Tag();
+    $upload_path='public/media/images_tag/';
+    $image_name=date('dmy_H_s_i');
+    $image=$request->file('image');
+    $ext=strtolower($image->getClientOriginalExtension());
+    $image_full_name=$image_name.'.'.$ext;
+    //upload image
+    /*
+    var_dump($image_full_name);
+    var_dump($request->file('image'));
+    exit();
+    */
+    $success=$image->move($upload_path,$image_full_name);
+
+    $tag->name=$request->tag;
+    $tag->image=$upload_path.$image_full_name;
+
+    $tag->save();
+    
+    return redirect()->route('home');
+
 }
 
 public function Store(Request $request){
@@ -139,6 +165,44 @@ $tags_new=Tag::get()->all();
 return view('MyWork.edit',compact('project','tags_new'));
 
 
+}
+public function Edit_tag($id){
+
+    $tag=Tag::find($id);
+    return view('MyWork.edit_tag',compact('tag'));
+}
+public function All_Tags(){
+    $get_tags=Tag::get()->all();
+    //dd($tags);
+    //exit();
+    return view('MyWork.all_tags',compact('get_tags'));
+}
+public function Update_tag(Request $request,$id){
+    $tag=Tag::find($id);
+    //var_dump($id);
+    //dd($request->file('image'));
+    //exit();
+    $oldImage=$request->old_image;
+    $image=$request->file('image');
+    $tag->name=$request->tag;
+    if($image){
+        if(file_exists($oldImage)){
+        unlink($oldImage);
+        }
+   
+    $image_name=date('dmy_H_s_i');
+    $ext=strtolower($image->getClientOriginalExtension());
+    $image_full_name=$image_name.'.'.$ext;
+    $upload_path='public/media/images_tag/';
+    $image_url=$upload_path.$image_full_name;
+    $success=$image->move($upload_path,$image_full_name);
+
+    $tag->image=$image_url;
+    }
+    $tag->save();
+
+        return redirect()->route('tags.all')
+                        ->with('success','Project updated successfully!');
 }
 public function Update(Request $request,$id){
     $oldImage=$request->old_image;

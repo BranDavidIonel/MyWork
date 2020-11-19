@@ -42,6 +42,10 @@
                    Projects
                     </a>
                     </li>
+                    <li class="{{Request::path()==='home'? 'active' : '' }}"><a  class="nav-link" href="{{ route('home') }}">
+                        Change Projects
+                    </a>
+                    </li>
                    
                     </ul>
                     

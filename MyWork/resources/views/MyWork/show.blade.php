@@ -49,7 +49,7 @@
     Tag
     @foreach ($data->Tags as $tag)
    
-		<a href="{{route('MyWork.index',['tag'=>$tag->name])}}"> {{ $tag->name}} </a>
+		<a href="{{route('MyWork.index',['tag'=>$tag->name])}}"> {{ $tag->name}} <img width="30px" height="30px" src="{{URL::to($tag->image)}}"></a>
 	@endforeach
     <div>
  </div>  
