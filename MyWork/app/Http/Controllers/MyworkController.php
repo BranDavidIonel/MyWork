@@ -63,7 +63,7 @@ public function Store_tag(Request $request){
 
     $tag->save();
     
-    return redirect()->route('home');
+    return redirect()->route('tags.all');
 
 }
 
@@ -283,6 +283,16 @@ public function Update(Request $request,$id){
 
 
 
+}
+public function Delete_tag($id){
+    $tag=Tag::find($id);
+    if(file_exists($tag->image)){
+        unlink($tag->image);
+        }
+    $tag->delete();
+        return redirect()->route('tags.all')
+        ->with('success','Tag delete successfully!');
+    
 }
 public function Delete($id){
 //search line 

@@ -50,7 +50,7 @@
     <strong>Old tags</strong>
     <ul class="list-group">
 	  @foreach($project->Tags as $tag)
-		<li  class="list-group-item list-group-item-success" value="{{ $tag->id}}">{{$tag->name}} <<img src="{{URL::to($tag->image)}}"> </img></li>
+		<li  class="list-group-item list-group-item-success" value="{{ $tag->id}}">{{$tag->name}} <img src="{{URL::to($tag->image)}}" width="50px" height="50px"> </li>
 	  @endforeach
     </ul>
 

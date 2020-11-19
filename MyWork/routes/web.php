@@ -39,3 +39,4 @@ Route::post('update/project/{id}', 'MyworkController@Update')->middleware('auth'
 Route::post('update/tag/{id}', 'MyworkController@Update_tag')->name('tag.update')->middleware('auth');
 
 Route::get('delete/project/{id}', 'MyworkController@Delete')->middleware('auth');
+Route::get('delete/tag/{id}', 'MyworkController@Delete_tag')->name('tag.delete')->middleware('auth');
